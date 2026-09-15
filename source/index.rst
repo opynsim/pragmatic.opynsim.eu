@@ -56,11 +56,12 @@ issues and have a rough idea of what's going on.
 
    guides/load-model-state-plot-stuff
    guides/load-data-into-dataframes
-   guides/make-a-pendulum
-   guides/render-motion-to-video
    guides/render-model-state-to-image
-   guides/end-effector-equilibrium-position
-   guides/end-effector-ligament-positioning
+   guides/render-model-states-to-video
+   guides/make-a-pendulum
+   guides/solve-forward-dynamics
+   guides/solve-equilibrium-position
+   guides/optimize-attachment-positions
 
 .. toctree::
    :caption: Other Links

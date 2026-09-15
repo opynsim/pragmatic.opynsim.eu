@@ -6,7 +6,7 @@ export PATH := .venv/bin:$(PATH)
 html:
 	sphinx-build -b html "source/" "build/"
 
-livehtml:
+livehtml: clean
 	sphinx-autobuild --open-browser --delay 1 "source/" "build/html"
 
 clean:

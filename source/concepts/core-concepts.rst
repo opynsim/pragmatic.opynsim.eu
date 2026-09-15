@@ -31,8 +31,13 @@ to describe spatial locations, orientations, and movements:
 
 .. admonition:: Pragmatic Programming Takeaway
 
-   TODO: explain how these are useful, what they pragmatically mean for
-   Python programmers, etc.
+   **Modelling involves a wide variety of mathematical algorithms, but only a few
+   datastructures.** Getting familiar with the general concepts and usage of
+   vectors, matrices, and transforms demystifies a wide variety of research
+   libraries. Learning how to take a vector out of one library (e.g. a
+   simulator) and pump it into another (e.g. a plotter, a machine learning
+   library) is one of the most useful skills you can master when developing
+   research codes.
 
 
 Common Coordinate Systems
@@ -67,11 +72,12 @@ commonly used coordinate system types:
 
 .. admonition:: Pragmatic Programming Takeaway
 
-   Defining geometry in local body frames keeps models modular and
-   reusable. However, during computational steps (such as inverse kinematics,
-   collision detection, or equations of motion), physics engines transform
-   local spatial vectors into the unified **Ground** frame to perform global
-   calculations.
+   **When writing code that handles spatial vectors, always be thinking
+   "What coordinate system is expressed in?"**. Defining spatial vectors in
+   local body/joint frames keeps the simulation engine modular and
+   reusable. However, downstream scripts usually transform them into the
+   unified **Ground** frame to keep calculations simple (e.g. when
+   calculating the distance between sets of point pairs in IK).
 
 
 Kinematic Chains & Trees
@@ -83,7 +89,6 @@ A **Kinematic Chain** refers to an assembly of rigid bodies connected by joints 
 2. **Degrees of Freedom (DoFs):** Each joint specifies the permissible relative motion between a parent and child body (e.g., a Pin/Hinge joint allows 1 rotational DoF; a Free joint allows 6 DoFs). In OpenSim nomenclature, these DoFs are managed as individual **Coordinates** ($q$).
 
 To construct a valid model, every body must attach to the root frame through a continuous kinematic chain. Unattached bodies cause singular system matrices during computation.
-
 
 Physics Systems
 ---------------

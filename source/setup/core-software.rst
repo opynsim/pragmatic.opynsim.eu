@@ -5,8 +5,7 @@ Core Software
 This section guides the setup of the core software used throughout this handbook.
 
 All code in this handbook is written in `Python <https://www.python.org/>`_.
-The following libraries are used extensively throughout this handbook and
-assumed to be installed on your system:
+The following libraries are used extensively throughout this handbook:
 
 - `Matplotlib <https://matplotlib.org/>`_: For plotting and visualization
 - `NumPy <https://numpy.org/>`_: For numerical computing (vectors, matrices)
@@ -15,7 +14,7 @@ assumed to be installed on your system:
 
 This combination ensures good interoperability with the broader scientific
 Python ecosystem. OpenSim is chosen because it has been used in musculoskeletal
-modelling for 15+ years. OPynSim (developed by this handbook's maintainers)
+modelling for 15+ years. OPynSim, developed by this handbook's maintainers,
 streamlines data import, output extraction, and visualization.
 
 
@@ -38,18 +37,18 @@ four standard steps:
 walkthroughs based on these common combinations of technologies:
 
 - :ref:`Windows + Python.org + Pip <win-pip>`
-- :ref:`macOS + Python (preinstalled/Python.org) + Pip <mac-pip>`
+- :ref:`macOS + Python (Python.org) + Pip <mac-pip>`
 - :ref:`Ubuntu + Python (apt) + Pip <ubuntu-pip>`
 
 .. admonition:: What is a Virtual Environment? Why use one?
 
-   A virtual environment is an isolated directory tree that contains a specific
+   A virtual environment is an isolated directory that contains a specific
    Python installation plus additional packages. Using virtual environments prevents
-   dependency conflicts between your projects (each project gets its own environment),
-   and avoids modifying your system-wide Python installation (which may break things).
+   library conflicts between your projects and avoids modifying your system-wide
+   Python installation (which may break things).
 
-   All walkthroughs here create a virtual environment (directory) called ``.venv``
-   because IDEs like :doc:`pycharm` and :doc:`vscode` automatically recognize it.
+   All walkthroughs here create a virtual environment directory called ``.venv``
+   because IDEs like :doc:`pycharm` and :doc:`vscode` automatically detect it.
 
 .. _win-pip:
 
@@ -62,9 +61,9 @@ Windows Setup (Python.org, pip)
 
 .. note::
 
-   OpenSim requires the Visual C++ Redistributable. If `import opensim`
+   OpenSim requires the Visual C++ Redistributable. If ``import opensim``
    later fails with a DLL error, download and run `vc_redist.x64.exe
-   <https://aka.ms/vs/17/release/vc_redist.x64.exe>`_.
+   <https://aka.ms/vc14/vc_redist.x64.exe>`_.
 
 2. **Open PowerShell**: Open the project directory in Windows explorer and then
    use your mouse to directly open a PowerShell window in it:
@@ -80,8 +79,8 @@ Windows Setup (Python.org, pip)
        python -m venv .venv
 
 4. **Activate Virtual Environment**: Activate the virtual environment in the
-   PowerShell window. This is temporary (it only applies to this instance of
-   the PowerShell window) and makes subsequent ``pip``/``python`` commands use
+   PowerShell window. This is temporary (it only applies to the PowerShell
+   window) and makes subsequent ``pip``/``python`` commands use
    the virtual environment:
 
    .. code:: powershell
@@ -96,7 +95,7 @@ Windows Setup (Python.org, pip)
 
          Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
 
-5. **Install Dependencies**: Use ``pip`` to install this handbook's dependencies
+5. **Install Libraries**: Use ``pip`` to install this handbook's libraries
    into the virtual environment:
 
    .. code:: powershell
@@ -118,7 +117,7 @@ Windows Setup (Python.org, pip)
       import opynsim     # try `import`ing `opynsim`
       import opynsim.ui  # try `import`ing `opynsim.ui`
 
-      # should show a spinning torus, manually close the window
+      # should show a spinning torus, you must manually close the window
       opynsim.ui.show_hello_ui()
 
       quit()  # close the Python shell
@@ -165,7 +164,7 @@ macOS Setup (Python.org, pip)
 
       source .venv/bin/activate
 
-5. **Install Dependencies**: Use ``pip`` to install this handbook's dependencies
+5. **Install Libraries**: Use ``pip`` to install this handbook's libraries
    into the virtual environment:
 
    .. code:: bash
@@ -187,7 +186,7 @@ macOS Setup (Python.org, pip)
       import opynsim     # try `import`ing `opynsim`
       import opynsim.ui  # try `import`ing `opynsim.ui`
 
-      # should show a spinning torus, manually close the window
+      # should show a spinning torus, you must manually close the window
       opynsim.ui.show_hello_ui()
 
       quit()  # close the Python shell
@@ -237,7 +236,7 @@ Ubuntu Setup (system Python, pip)
 
        source .venv/bin/activate
 
-5. **Install Dependencies**: Use ``pip`` to install this handbook's dependencies
+5. **Install Libraries**: Use ``pip`` to install this handbook's libraries
    into the virtual environment:
 
    .. code:: bash
@@ -259,7 +258,7 @@ Ubuntu Setup (system Python, pip)
       import opynsim     # try `import`ing `opynsim`
       import opynsim.ui  # try `import`ing `opynsim.ui`
 
-      # should show a spinning torus, manually close the window
+      # should show a spinning torus, you must manually close the window
       opynsim.ui.show_hello_ui()
 
       quit()  # close the Python shell
