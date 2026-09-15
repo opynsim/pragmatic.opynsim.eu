@@ -1,56 +1,273 @@
 Core Software
 =============
 
+
 This section guides the setup of the core software used throughout this handbook.
 
 All code in this handbook is written in `Python <https://www.python.org/>`_.
-The following libraries are considered core:
+The following libraries are used extensively throughout this handbook and
+assumed to be installed on your system:
 
 - `Matplotlib <https://matplotlib.org/>`_: For plotting and visualization
 - `NumPy <https://numpy.org/>`_: For numerical computing (vectors, matrices)
 - `Pandas <https://pandas.pydata.org/>`_: For tabular data manipulation (dataframes).
-- `OpenSim <https://opensim.stanford.edu/>`_ + `OPynSim <https://opynsim.eu>`_: For musculoskeletal modelling.
+- `OpenSim <https://opensim.stanford.edu/>`_ + `OPynSim <http://opynsim.eu>`_: For musculoskeletal modelling.
 
-Matplotlib, NumPy, and Pandas ensure good interoperability with the
-broader scientific Python ecosystem. OpenSim is chosen because it has
-been used in musculoskeletal modelling for 15+ years. OPynSim (developed
-by the guide's maintainers) streamlines specific modeling workflows,
-particularly data and output extraction.
-
-Set Up Python Environment
--------------------------
-
-Before running any code in this handbook, you need a working Python installation
-and virtual environment. This has three primary steps:
-
-1. **Install Python**: Download and install a supported Python version (3.10+ recommended)
-   for your operating system.
-2. **Create a Virtual Environment**: Use Python's built-in ``venv`` module to initialize
-   an isolated virtual environment directory for this project. Most developer IDEs (e.g.
-   Visual Studio Code, PyCharm) expect the directory to be called ``.venv/``.
-3. **Activate and Install Dependencies**: Activate the environment within your terminal session
-   and use ``pip`` to install the core libraries (NumPy, Pandas, Matplotlib, OpenSim, OPynSim).
-
-Follow the steps below corresponding to your operating system to complete the setup.
-
-.. note:: Why Use a Virtual Environment?
-
-   A virtual environment is a self-contained directory that holds a specific version
-   of Python and its installed packages. Isolating your dependencies prevents version
-   conflicts between this handbook's code and other Python projects on your system.
-   It also ensures that updating a system-wide library will not break your setup.
+This combination ensures good interoperability with the broader scientific
+Python ecosystem. OpenSim is chosen because it has been used in musculoskeletal
+modelling for 15+ years. OPynSim (developed by this handbook's maintainers)
+streamlines data import, output extraction, and visualization.
 
 
-High-Level Setup Workflow
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Overview
+--------
+
+Setting up a musculoskeletal modelling environment requires the same
+four standard steps:
+
+1. **Install Python**: Download and install a supported Python version
+   (v3.12+).
+2. **Create a Virtual Environment**: Setup a project directory with its
+   own Python virtual environment.
+3. **Install Libraries**: Install necessary libraries (dependencies) into
+   the virtual environment.
+4. **Run Python Scripts**: Use an IDE to open/edit/run Python
+   scripts in the project directory.
+
+**For a specific guide**, this page contains Python and library installation
+walkthroughs based on these common combinations of technologies:
+
+- :ref:`Windows + Python.org + Pip <win-pip>`
+- :ref:`macOS + Python (preinstalled/Python.org) + Pip <mac-pip>`
+- :ref:`Ubuntu + Python (apt) + Pip <ubuntu-pip>`
+
+.. admonition:: What is a Virtual Environment? Why use one?
+
+   A virtual environment is an isolated directory tree that contains a specific
+   Python installation plus additional packages. Using virtual environments prevents
+   dependency conflicts between your projects (each project gets its own environment),
+   and avoids modifying your system-wide Python installation (which may break things).
+
+   All walkthroughs here create a virtual environment (directory) called ``.venv``
+   because IDEs like :doc:`pycharm` and :doc:`vscode` automatically recognize it.
+
+.. _win-pip:
+
+Windows Setup (Python.org, pip)
+-------------------------------
+
+1. **Install Python**: Download the latest Python installer (v3.12+)
+   from `python.org <https://www.python.org/downloads/>`_. Run the installer and
+   make sure to check **"Add python.exe to PATH"** before clicking Install.
+
+.. note::
+
+   OpenSim requires the Visual C++ Redistributable. If `import opensim`
+   later fails with a DLL error, download and run `vc_redist.x64.exe
+   <https://aka.ms/vs/17/release/vc_redist.x64.exe>`_.
+
+2. **Open PowerShell**: Open the project directory in Windows explorer and then
+   use your mouse to directly open a PowerShell window in it:
+   ``Shift+RightClick > Open in Terminal (or Open PowerShell Window Here)``. Alternatively, you can
+   manually open PowerShell from the start menu and then navigate to your
+   project directory with (e.g.) ``cd C:\Users\adam\Desktop\my-project``.
+
+3. **Create Virtual Environment**: In the PowerShell terminal, create a
+   virtual environment called ``.venv`` in the current (project) directory:
+
+   .. code:: powershell
+
+       python -m venv .venv
+
+4. **Activate Virtual Environment**: Activate the virtual environment in the
+   PowerShell window. This is temporary (it only applies to this instance of
+   the PowerShell window) and makes subsequent ``pip``/``python`` commands use
+   the virtual environment:
+
+   .. code:: powershell
+
+      .\.venv\Scripts\activate
+
+   .. note::
+
+      If script execution is disabled, you may need to run this first:
+
+      .. code:: powershell
+
+         Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+
+5. **Install Dependencies**: Use ``pip`` to install this handbook's dependencies
+   into the virtual environment:
+
+   .. code:: powershell
+
+       pip install matplotlib numpy pandas opensim opynsim
+
+6. **Validate Installation (optional)**: Run ``python`` to open a Python shell in
+   the PowerShell window:
+
+   .. code:: powershell
+
+      python
+
+   And then run these commands to ensure the core software works in the environment:
+
+   .. code:: python
+
+      import opensim     # try `import`ing `opensim`
+      import opynsim     # try `import`ing `opynsim`
+      import opynsim.ui  # try `import`ing `opynsim.ui`
+
+      # should show a spinning torus, manually close the window
+      opynsim.ui.show_hello_ui()
+
+      quit()  # close the Python shell
 
 
+Once installed and validated, your Python environment is then capable of running
+scripts that use the core libraries from a terminal (e.g. with
+``python some_processing_script.py``). This is useful for batch processing,
+but is rather impractical for day-to-day development. Therefore, the next step
+is to set up an IDE that uses the environment. See :doc:`pycharm` and
+:doc:`vscode` for more information on that.
 
-Set Up Python Environment
--------------------------
+.. _mac-pip:
 
-The first thing you should set up Python.
+macOS Setup (Python.org, pip)
+-----------------------------
+
+1. **Install Python**: You can manually download and install Python
+   from `Python.org <https://www.python.org>`_.
+
+   .. note::
+
+      After installation completes, open your ``Applications/Python 3.xx`` folder
+      and double-click **"Install Certificates.command"**. This is required for
+      ``pip`` to download packages over SSL without errors.
+
+2. **Open Terminal in Project Directory**: All subsequent steps use a terminal. Open it
+   with ``Cmd+Space -> Terminal -> Enter`` and navigate to your project directory by
+   running ``cd your/project/directory``.
+
+3. **Create Virtual Environment**: In the terminal window, create a
+   virtual environment called ``.venv`` in the current (project) directory:
+
+   .. code:: bash
+
+       python3 -m venv .venv
+
+4. **Activate Virtual Environment**: Activate the virtual environment in the
+   terminal. This is temporary (it only applies to this instance of
+   the terminal) and makes subsequent ``pip``/``python`` commands use
+   the virtual environment:
+
+   .. code:: bash
+
+      source .venv/bin/activate
+
+5. **Install Dependencies**: Use ``pip`` to install this handbook's dependencies
+   into the virtual environment:
+
+   .. code:: bash
+
+       pip install matplotlib numpy pandas opensim opynsim
+
+6. **Validate Installation (optional)**: Run ``python`` to open a Python shell in
+   the terminal:
+
+   .. code:: bash
+
+      python
+
+   And then run these commands to ensure the core software works in the environment:
+
+   .. code:: python
+
+      import opensim     # try `import`ing `opensim`
+      import opynsim     # try `import`ing `opynsim`
+      import opynsim.ui  # try `import`ing `opynsim.ui`
+
+      # should show a spinning torus, manually close the window
+      opynsim.ui.show_hello_ui()
+
+      quit()  # close the Python shell
+
+Once installed and validated, your Python environment is then capable of running
+scripts that use the core libraries from a terminal (e.g. with
+``python some_processing_script.py``). This is useful for batch processing,
+but is rather impractical for day-to-day development. Therefore, the next step
+is to set up an IDE that uses the environment. See :doc:`pycharm` and
+:doc:`vscode` for more information on that.
 
 
-Set Up IDE/Development Environment
-----------------------------------
+.. _ubuntu-pip:
+
+Ubuntu Setup (system Python, pip)
+---------------------------------
+
+1. **Install System Dependencies**: Open a terminal (``Ctrl+Alt+T``) and run
+   the following command to install ``python3``, ``pip``, and the virtual
+   environment module via ``apt``:
+
+   .. code:: bash
+
+       sudo apt update
+       sudo apt install -y python3 python3-venv python3-pip
+
+2. **Open Terminal in Project Directory**: All subsequent steps use the terminal.
+   Navigate to your project directory by running:
+
+   .. code:: bash
+
+       cd path/to/your/project
+
+3. **Create Virtual Environment**: In the terminal window, create a
+   virtual environment called ``.venv`` in the current (project) directory:
+
+   .. code:: bash
+
+       python3 -m venv .venv
+
+4. **Activate Virtual Environment**: Activate the virtual environment in the
+   terminal. This is temporary (it only applies to this instance of
+   the terminal) and makes subsequent ``pip``/``python`` commands use
+   the virtual environment:
+
+   .. code:: bash
+
+       source .venv/bin/activate
+
+5. **Install Dependencies**: Use ``pip`` to install this handbook's dependencies
+   into the virtual environment:
+
+   .. code:: bash
+
+       pip install matplotlib numpy pandas opensim opynsim
+
+6. **Validate Installation (optional)**: Run ``python`` to open a Python shell in
+   the terminal:
+
+   .. code:: bash
+
+       python
+
+   And then run these commands to ensure the core software works in the environment:
+
+   .. code:: python
+
+      import opensim     # try `import`ing `opensim`
+      import opynsim     # try `import`ing `opynsim`
+      import opynsim.ui  # try `import`ing `opynsim.ui`
+
+      # should show a spinning torus, manually close the window
+      opynsim.ui.show_hello_ui()
+
+      quit()  # close the Python shell
+
+
+Once installed and validated, your Python environment is then capable of running
+scripts that use the core libraries from a terminal (e.g. with
+``python some_processing_script.py``). This is useful for batch processing,
+but is rather impractical for day-to-day development. Therefore, the next step
+is to set up an IDE that uses the environment. See :doc:`pycharm` and
+:doc:`vscode` for more information on that.

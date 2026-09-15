@@ -15,19 +15,6 @@ others may use `NumPy <https://numpy.org/>`_,
 the most pragmatic solution.
 
 
-Prerequisites
--------------
-
-This handbook assumes:
-
-- You have some familiarity with the `Python <https://python.org>`_ programming language.
-- You know how to install Python packages from the command line (e.g. ``pip install numpy``).
-
-If you are unfamiliar with these things, we recommend going through a beginner's Python
-course to learn Python and using LLMs to tackle technical/Python problems (e.g. "how
-do I install OpenSim into my Python environment").
-
-
 Handbook Structure
 ------------------
 
@@ -37,10 +24,12 @@ This handbook is structured into three sections:
 - **Concepts**: General concepts/techniques that apply to many musculoskeletal modelling problems/tasks.
 - **Guides**: Guides that focus on solving a specific problem/task.
 
-For readers that are new to musculoskeletal modelling, we recommend that
-you start by **setting up your system with the core software** and
-skimming over some **core concepts** before tackling a **guide**, so
-that you encounter fewer technical issues and understand what's going on.
+**Are you new to Python scripting and/or musculoskeletal modelling?** We
+recommend that you first set up :doc:`setup/core-software` and
+configure an IDE such as :doc:`setup/pycharm` or :doc:`setup/vscode`
+to use it. After that, read through :doc:`concepts/core-concepts` before
+tackling a specific guide. This way, you will encounter fewer technical
+issues and have a rough idea of what's going on.
 
 .. toctree::
    :maxdepth: 2
@@ -48,7 +37,8 @@ that you encounter fewer technical issues and understand what's going on.
    :hidden:
 
    setup/core-software
-   setup/ides
+   setup/pycharm
+   setup/vscode
 
 .. toctree::
    :maxdepth: 2
@@ -56,23 +46,25 @@ that you encounter fewer technical issues and understand what's going on.
    :hidden:
 
    concepts/core-concepts
+   concepts/opensim-concepts
+   concepts/opynsim-concepts
 
 .. toctree::
    :maxdepth: 2
    :caption: Guides
    :hidden:
 
+   guides/load-model-state-plot-stuff
+   guides/load-data-into-dataframes
+   guides/make-a-pendulum
+   guides/render-motion-to-video
+   guides/render-model-state-to-image
    guides/end-effector-equilibrium-position
    guides/end-effector-ligament-positioning
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Examples
+   :caption: Other Links
    :hidden:
 
-.. toctree::
-    :caption: Other Links
-    :hidden:
-
-    OPynSim GitHub <https://github.com/opynsim/opynsim>
-    OpenSim Creator <https://opensimcreator.com>
+   OPynSim GitHub <https://github.com/opynsim/opynsim>
+   OpenSim Creator <https://opensimcreator.com>
