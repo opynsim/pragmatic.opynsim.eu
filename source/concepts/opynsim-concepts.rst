@@ -14,9 +14,11 @@ Model Specification
 
 An OPynSim `ModelSpecification <https://docs.opynsim.eu/manual/en/latest/api/opynsim.html#opynsim.ModelSpecification>`_
 represents an **editable data structure that describes what a model is** (e.g., bodies,
-joints, muscle paths, mass properties). In contrast to OpenSim, it does not have a
-physics system and instead requires scripts to explicitly call ``.compile()`` when
-the specification is complete:
+joints, muscle paths, mass properties).
+
+In contrast to OpenSim, an ``opynsim.ModelSpecification`` does not have a physics system
+and instead requires scripts to explicitly call ``.compile()`` when the specification
+is complete to yield an ``opynsim.Model``:
 
 .. code:: python
 
@@ -53,14 +55,19 @@ DataFrame
 ---------
 
 An OPynSim `DataFrame <https://docs.opynsim.eu/manual/en/latest/api/opynsim.html#opynsim.DataFrame>`_ represents
-a table containing rows and columns. OPynSim's ``DataFrame`` class mostly exists because
-the OPynSim API must accept/emit *something* that isn't dependent on a particular dataframe
-library (e.g. Pandas, Polars, or Arrow - there's many).
+a table containing rows and columns. ``opynsim.DataFrame`` mostly exists so that
+the OPynSim API isn't dependent on a specific Python dataframe library
+(e.g. `Pandas <https://pandas.pydata.org/>`_, `Polars <https://pola.rs/>`_, `PyArrow <https://arrow.apache.org/docs/python/index.html>`_),
+enabling research scripts to make the choice.
 
-The pragmatic thing to keep in mind is that OPynSim implements the Arrow API, which means it
-supports conversion to/from those common ``DataFrame`` types. This means you can (e.g.) load
-OpenSim-specific data via OPynSim, convert it to a pandas dataframe, perform any data manipulation
-or scaling in pandas, and then convert it back into an OPynSim dataframe passing it into OPynSim:
+The pragmatic thing to keep in mind is that ``opynsim.DataFrame`` implements the
+`Arrow API <https://arrow.apache.org/docs/format/CDataInterface.html>`_, which means it
+supports rapid conversion to/from libraries with ``DataFrame``\s that also support that
+API (many do).
+
+For example, you load OpenSim-specific data via OPynSim, convert it to a pandas
+dataframe, perform any data manipulation or scaling in pandas, and then convert it back
+into an OPynSim dataframe passing it into OPynSim:
 
 .. code:: python
 

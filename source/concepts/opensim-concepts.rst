@@ -27,12 +27,12 @@ When creating or modifying an OpenSim model programmatically, changing a propert
 does **not** immediately update the underlying computational system. You must
 pass the model through its lifecycle initialization sequence:
 
-1. **``finalizeFromProperties()``**: Updates internal component parameters
+1. ``finalizeFromProperties()``: Updates internal component parameters
    after modifying properties.
-2. **``finalizeConnections(model)``**: Resolves topological linkages between
+2. ``finalizeConnections(model)``: Resolves topological linkages between
    components (e.g., connecting a muscle to a body frame).
-3. **``buildSystem()``** / **``initSystem()``**: Allocates the underlying SimTK
-   multibody system and generates an initial ``State`` object.
+3. ``buildSystem()`` / ``initSystem()``: Allocates the underlying physics
+   system and generates an initial ``State`` object.
 
 Model Assembly & Muscle Equilibration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -89,8 +89,8 @@ path muscle—retrieve the component, modify its property, and re-initialize the
    state = model.initSystem()
 
 
-State (`SimTK::State`)
-----------------------
+State (``SimTK::State``)
+------------------------
 
 An OpenSim ``Model`` is strictly stateless and immutable during execution. All
 dynamic variable data—time, coordinates, velocities, and muscle activations—are

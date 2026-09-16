@@ -33,15 +33,14 @@ to describe spatial locations, orientations, and movements:
 
    **Modelling involves a wide variety of mathematical algorithms, but only a few
    datastructures.** Getting familiar with the general concepts and usage of
-   vectors, matrices, and transforms demystifies a wide variety of research
+   vectors, matrices, and transforms is relevant to a wide variety of research
    libraries. Learning how to take a vector out of one library (e.g. a
    simulator) and pump it into another (e.g. a plotter, a machine learning
-   library) is one of the most useful skills you can master when developing
-   research codes.
+   library) is valuable skill to master when developing research codes.
 
 
-Common Coordinate Systems
--------------------------
+Coordinate Systems
+------------------
 
 Musculoskeletal models contain multiple coexisting coordinate
 systems to make local definitions intuitive. Here are some
@@ -67,41 +66,61 @@ commonly used coordinate system types:
 - **Non-Cartesian Coordinate Systems:** While 3D spatial points use Cartesian
   coordinates :math:`(x, y, z)`, certain parts of a model may rely on
   alternative representations. For example, **cylindrical coordinates** $(\rho, \phi, z)$
-  might be the best way to describe a muscle wrapping over a cylinder. **Spherical coordinates**
-  may tbe the best representation of a ball-in-socket joint, and so on.
+  might be the best way to describe a muscle wrapping over a cylinder.
+  **Spherical coordinates** may be the best representation of a
+  ball-in-socket joint, and so on.
 
 .. admonition:: Pragmatic Programming Takeaway
 
    **When writing code that handles spatial vectors, always be thinking
-   "What coordinate system is expressed in?"**. Defining spatial vectors in
-   local body/joint frames keeps the simulation engine modular and
-   reusable. However, downstream scripts usually transform them into the
-   unified **Ground** frame to keep calculations simple (e.g. when
-   calculating the distance between sets of point pairs in IK).
+   "What coordinate system is expressed in?"**. A common trick is to transform
+   everything into the unified **Ground** frame to simplify things
+   (e.g. when calculating the distance between sets of point pairs in IK).
 
 
 Kinematic Chains & Trees
 ------------------------
 
-A **Kinematic Chain** refers to an assembly of rigid bodies connected by joints that constrain their relative motion. In musculoskeletal modeling:
+A **Kinematic Chain** refers to an assembly of rigid bodies connected by joints that
+constrain their relative motion. In musculoskeletal modeling:
 
-1. **Topology:** Models form an open-loop or closed-loop **joint hierarchy (tree graph)** rooted at the **Ground** environment frame.
-2. **Degrees of Freedom (DoFs):** Each joint specifies the permissible relative motion between a parent and child body (e.g., a Pin/Hinge joint allows 1 rotational DoF; a Free joint allows 6 DoFs). In OpenSim nomenclature, these DoFs are managed as individual **Coordinates** ($q$).
+1. **Topology:** Models form an open-loop or closed-loop **joint hierarchy (tree
+   graph)** rooted at the **Ground** environment frame.
+2. **Degrees of Freedom (DoFs):** Each joint specifies the permissible relative
+   motion between a parent and child body (e.g., a Pin/Hinge joint allows 1 rotational
+   DoF; a Free joint allows 6 DoFs). In OpenSim nomenclature, these DoFs are managed
+   as individual **Coordinates** (:math:`q`).
 
-To construct a valid model, every body must attach to the root frame through a continuous kinematic chain. Unattached bodies cause singular system matrices during computation.
+To construct a valid model, every body must attach to the root frame through a
+continuous kinematic chain. Unattached bodies cause singular system matrices
+during computation, or must be automagically attached to ground with a joint.
+
+.. admonition:: Pragmatic Programming Takeaway
+
+   **When designing/using musculoskeletal models, be aware of the kinematic chain/tree**.
+   Moving a body that's further up in the tree causes all children to move. Attaching bodies
+   to each other incorrectly results in invalid motion. It can be useful to sketch the
+   topology on paper when designing a model.
 
 Physics Systems
 ---------------
 
-A **Physics System** combines the structural kinematic tree with physical laws, forces, and mathematical constraints to evaluate or simulate physical movement:
+A **Physics System** combines the structural kinematic tree with physical laws,
+forces, and mathematical constraints to evaluate or simulate physical movement:
 
-- **Constraints:** Loop-closure constraints, coordinate couplings, or point-on-line constraints that further restrict motion beyond joint definitions.
-- **Force Elements:** Passive forces (gravity, contact dynamics, spring-dampers) and active forces (actuators, Hill-type muscle models).
-- **System Solvers:** Numerical engines that process state equations to solve key biomechanical problems:
+- **Constraints:** Loop-closure constraints, coordinate couplings, or point-on-line
+  constraints that further restrict motion beyond joint definitions.
+- **Force Elements:** Passive forces (gravity, contact dynamics, spring-dampers) and
+  active forces (actuators, Hill-type muscle models).
+- **System Solvers:** Numerical engines that process state equations to solve key
+  biomechanical problems:
 
-  - **Forward Dynamics:** Integrates equations of motion forward in time given muscle activations to compute resulting accelerations and trajectories.
-  - **Inverse Kinematics (IK):** Finds joint coordinates ($q$) that minimize the distance between experimental motion capture markers and model markers.
-  - **Inverse Dynamics (ID):** Calculates net joint moments required to produce a given set of kinematically observed accelerations.
+  - **Forward Dynamics:** Integrates equations of motion forward in time given muscle
+    activations to compute resulting accelerations and trajectories.
+  - **Inverse Kinematics (IK):** Finds joint coordinates ($q$) that minimize the
+    distance between experimental motion capture markers and model markers.
+  - **Inverse Dynamics (ID):** Calculates net joint moments required to produce a
+    given set of kinematically observed accelerations.
 
 
 Model Specification
@@ -121,7 +140,7 @@ Crucially, the Model Specification is **static parameter storage**; it contains 
 Model State
 -----------
 
-A **Model State** represents the instantaneous physical condition of a dynamic system at a specific time point $t$.
+A **Model State** represents the instantaneous physical condition of a dynamic system at a specific time point :math:`t`.
 
 While the *Model Specification* defines what the system *is*, the *State* defines what the system *is currently doing*. A complete state vector usually contains:
 

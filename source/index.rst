@@ -39,6 +39,7 @@ issues and have a rough idea of what's going on.
    setup/core-software
    setup/pycharm
    setup/vscode
+   setup/example-data
 
 .. toctree::
    :maxdepth: 2
