@@ -4,3 +4,4 @@ sphinx-copybutton==0.5.2
 sphinx-autobuild==2025.8.25
 opensim==4.6
 opynsim==0.0.7
+matplotlib==3.11.2

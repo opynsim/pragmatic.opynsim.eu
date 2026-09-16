@@ -12,9 +12,9 @@ workspace directory and virtual environment in a few quick steps.
    directory where you created your ``.venv`` (or Conda environment) in :doc:`core-software`.
 
 3. **Select the Python Interpreter**: You can see which Python interpreter VS Code is
-   currently using in the bottom-right of the main window. VS Code usually detects and
-   selects an existing ``.venv`` folder automatically. To explicitly set or change the
-   active environment:
+   currently using in the bottom-right of the main window when a Python file is opened.
+   VS Code usually detects and selects an existing ``.venv`` folder automatically. To
+   explicitly set or change the active environment:
 
    - Open the Command Palette using ``Ctrl+Shift+P`` (Windows/Linux) or ``Cmd+Shift+P`` (macOS).
    - Type and select **Python: Select Interpreter**.
@@ -27,7 +27,7 @@ workspace directory and virtual environment in a few quick steps.
 
    .. note::
 
-      Once selected, opening a new terminal in VS Code (``Ctrl+``) will automatically
+      Once selected, opening a new terminal in VS Code (``Ctrl+Shift+```) will automatically
       activate your virtual environment.
 
 4. **Verify OpenSim Import**:
