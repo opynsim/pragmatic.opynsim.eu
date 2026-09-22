@@ -10,7 +10,7 @@ following libraries extensively:
 - `Matplotlib <https://matplotlib.org/>`_: For plotting and visualization
 - `NumPy <https://numpy.org/>`_: For numerical computing (vectors, matrices)
 - `Pandas <https://pandas.pydata.org/>`_: For tabular data manipulation (dataframes).
-- `PyArrow <https://arrow.apache.org/docs/python/index.html>`_: For high-performance dataframe interchange.
+- `PyArrow <https://arrow.apache.org/docs/python/index.html>`_: For high-performance dataframe interchange to/from pandas.
 - `OpenSim <https://opensim.stanford.edu/>`_ + `OPynSim <http://opynsim.eu>`_: For musculoskeletal modelling.
 
 This combination ensures good interoperability with the broader scientific

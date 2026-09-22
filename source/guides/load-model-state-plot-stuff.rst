@@ -40,6 +40,7 @@ into a string (``str``) before passing it to OpenSim:
     for osim in Path("pragmatic_resources/gait2354").glob("*.osim"):
         models[osim.name] = opensim.Model(str(osim))  # note: `str`
 
+.. _load-states-from-file:
 
 Load States From a File
 -----------------------
