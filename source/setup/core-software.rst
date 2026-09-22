@@ -10,6 +10,7 @@ following libraries extensively:
 - `Matplotlib <https://matplotlib.org/>`_: For plotting and visualization
 - `NumPy <https://numpy.org/>`_: For numerical computing (vectors, matrices)
 - `Pandas <https://pandas.pydata.org/>`_: For tabular data manipulation (dataframes).
+- `PyArrow <https://arrow.apache.org/docs/python/index.html>`_: For high-performance dataframe interchange.
 - `OpenSim <https://opensim.stanford.edu/>`_ + `OPynSim <http://opynsim.eu>`_: For musculoskeletal modelling.
 
 This combination ensures good interoperability with the broader scientific
@@ -102,7 +103,7 @@ Windows Setup (Python.org, pip)
 
    .. code:: powershell
 
-       pip install matplotlib numpy pandas opensim opynsim
+       pip install matplotlib numpy pandas pyarrow opensim opynsim
 
 6. **Validate Installation (optional)**: Run ``python`` to open a Python shell:
 
@@ -171,7 +172,7 @@ macOS Setup (Python.org, pip)
 
    .. code:: bash
 
-       pip install matplotlib numpy pandas opensim opynsim
+       pip install matplotlib numpy pandas pyarrow opensim opynsim
 
 6. **Validate Installation (optional)**: Run ``python`` to open a Python shell in
    the terminal:
@@ -243,7 +244,7 @@ Ubuntu Setup (system Python, pip)
 
    .. code:: bash
 
-       pip install matplotlib numpy pandas opensim opynsim
+       pip install matplotlib numpy pandas pyarrow opensim opynsim
 
 6. **Validate Installation (optional)**: Run ``python`` to open a Python shell in
    the terminal:
