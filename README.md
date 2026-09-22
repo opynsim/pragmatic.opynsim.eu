@@ -13,7 +13,9 @@ open-source software for musculoskeletal modelling.
 
 This is a Sphinx documentation project that also installs the simulation
 libraries (e.g. `opynsim` and `opensim`) for testing and image-generation
-purposes. Here is how you can build it with `uv`:
+purposes.
+
+Here is how you can build it with `uv`:
 
 ```bash
 #!/usr/bin/env bash
@@ -21,6 +23,23 @@ purposes. Here is how you can build it with `uv`:
 uv venv --python 3.12
 uv pip install -r requirements.txt
 uv run sphinx-build source/ build/
+```
+
+Here is how you can build it with `py` + `pip` (Windows):
+
+```powershell
+# In PowerShell:
+py -3.12 -m venv .venv
+& .venv/Scripts/activate
+pip install -r requirements.txt
+sphinx-build source/ build/
+```
+
+The development environment also includes `sphinx-autobuild`, which
+automatically rebuilds + hosts the documentation as you edit it:
+
+```bash
+sphinx-autobuild source/ build/
 ```
 
 ## License
