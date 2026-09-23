@@ -78,9 +78,7 @@ into an OPynSim dataframe passing it into OPynSim:
    # Convert FROM an `opynsim.DataFrame` (e.g. for data manipulation, plotting, csv writing)
    pandas_df = opynsim_df.to_pandas()
    polars_df = opynsim_df.to_polars()
-   arrow_df = opynsim_df.to_arrow()
 
    # Convert TO an `opynsim.DataFrame` (e.g. for use with OPynSim)
    opyn.DataFrame(pandas_df)
    opyn.DataFrame(polars_df)
-   opyn.DataFrame(arrow_df)
