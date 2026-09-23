@@ -171,8 +171,8 @@ the plot's ``savefig`` function to write an image file directly from the
 plotter.
 
 
-Customize Render (e.g. Camera, Dimensions)
-------------------------------------------
+Customize Rendering Parameters
+------------------------------
 
 ``render_model_in_state`` also accepts ``camera`` and ``dimensions`` as
 arguments, which let you adjust the model's framing in the 3D world and
