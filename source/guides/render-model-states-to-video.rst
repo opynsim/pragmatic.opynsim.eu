@@ -1,8 +1,10 @@
 Render Model+States to Video
 ============================
 
-This guide goes through the process of using OPynSim to
-render a model's motion to a video file.
+This guide continues the content from :doc:`render-model-state-to-image` by
+rendering multiple images as a frame sequence that is then written to
+a video file. This can be extremely useful for linking model motion to data
+(you can composite the render with plots) and presentations.
 
 Setup Example Data
 ------------------
@@ -11,28 +13,124 @@ If you want to run the Python code in this guide, you must first set up the
 :doc:`../setup/example-data`.
 
 
-Install Video Encoding Libraries
---------------------------------
-
-TODO
-
-Load and Resample Model States
-------------------------------
-
-TODO
-
-Load Model
+Setup PyAV
 ----------
 
-TODO
+In addition to the :doc:`../setup/core-software`, this guide additionally requires
+installing `PyAV <https://github.com/pyav-org/pyav>`_, which enables encoding
+image data into common video file formats. You can install it from the command
+line similarly to how you installed the :doc:`../setup/core-software`:
+
+.. code:: bash
+
+    pip install av
+
+
+Load Model + Resampled States
+-----------------------------
+
+For video encoding, it's important to choose (and stick to) a particular
+framerate. The most common framerates are 24, 30, and 60 frames per
+second (FPS).
+
+In most cases, data will not be available at those rates, so you'll need
+to resample it. Here is an example of resampling an ``.mot`` file using
+pandas' interpolation support (related: :doc:`load-data-into-dataframes`):
+
+.. code:: python
+
+    import numpy as np
+    import opynsim as opyn
+    import pandas as pd
+
+    # Read model
+    model = opyn.read_osim("pragmatic_resources/gait2354/subject01.osim").compile()
+
+    # Read, normalize (radians), and resample data frame @ 60 Hz
+    df = opyn.read_mot("pragmatic_resources/gait2354/OutputReference/subject01_walk1_ik.mot")
+    df = model.convert_data_frame_to_radians(df)
+    df = df.to_pandas()
+    df = df.set_index("time")
+    t_60hz = np.arange(df.index.min(), df.index.max(), 1/60.0)
+    df = (
+        df.reindex(df.index.union(t_60hz))
+            .interpolate(method="index")
+            .loc[t_60hz]
+    )
+
+    # Read data frame into a `ModelStates` @ 60 Hz.
+    states = model.states_from_data_frame(opyn.DataFrame(df), realized_to=opyn.STAGE_REPORT)
+
 
 Render Video Frames
 -------------------
 
-TODO
+Once you have prepared the state(s) you would like to render, you can
+then set up a rendering loop where each iteration generates one frame
+of the video. This is a general software pattern that can be used
+to produce any animation - the only *actual* requirement is that
+you can render one frame for each time point.
+
+Basic Example: Directly Rendering to Video
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This example renders each model state directly into to a video
+file (``.mp4``) with no compositing of extra information:
+
+.. code:: python
+
+    import av
+    import numpy as np
+    import opynsim as opyn
+    import opynsim.graphics
+    import pandas as pd
+
+    # Load and prepare model + states.
+    fps = 60
+    model = opyn.read_osim("pragmatic_resources/gait2354/subject01.osim").compile()
+    df = opyn.read_mot("pragmatic_resources/gait2354/OutputReference/subject01_walk1_ik.mot")
+    df = model.convert_data_frame_to_radians(df)
+    df = df.to_pandas()
+    df = df.set_index("time")
+    ts = np.arange(df.index.min(), df.index.max(), 1/fps)
+    df = df.reindex(df.index.union(ts)).interpolate(method="index").loc[ts]
+    states = model.states_from_data_frame(opyn.DataFrame(df), realized_to=opyn.STAGE_REPORT)
+
+    # Make output video container + stream.
+    w, h = (1920, 1080)
+    container = av.open("animation.mp4", mode="w")
+    stream = container.add_stream("h264", rate=fps)
+    stream.width = w
+    stream.height = h
+    stream.pix_fmt = "yuv420p"
+    stream.options = {"crf": "23"}  # quality/bitrate
+
+    # Render each state as a frame in the video.
+    camera = opyn.graphics.Camera()
+    camera.direction = np.array([-1, 0, 0])
+    camera.position = np.array([1.7, 1, 0])
+    options = {
+        "dimensions":       (w, h),
+        "camera":           camera,
+        "background_color": opyn.graphics.Color.white,
+        "scene_cache":      opyn.graphics.SceneCache(),  # performance
+    }
+    for state in states:
+        texture = opyn.graphics.render_model_in_state(model, state, **options)
+        frame = av.VideoFrame.from_ndarray(texture.pixels_rgb24(), format="rgb24")
+        for packet in stream.encode(frame):
+            container.mux(packet)
+
+    # Finalize video file
+    for packet in stream.encode():
+        container.mux(packet)
+    container.close()
+
 
 Advanced Example
 ----------------
+
+TODO: this needs to be updated from something I was playing around with.
 
 .. code:: python
 
@@ -148,4 +246,3 @@ Advanced Example
 
             # Write the composite to the video file
             writer.append_data(composite_frame)
-
