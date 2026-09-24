@@ -158,10 +158,10 @@ Sometimes you'll want to get data *from* a third-party ``DataFrame`` *to* an
 ``opynsim.DataFrame``. Examples include loading cleaned-up ``DataFrame``\s
 into ``opynsim.ModelStates``, loading motion data from an alternative file
 formats (e.g. `.csv <https://en.wikipedia.org/wiki/Comma-separated_values>`_, `.parquet <https://en.wikipedia.org/wiki/Apache_Parquet>`_),
-into OPynSim, or writing OpenSim-compatible from OPynSim's ``DataFrame``.
+into OPynSim, or writing OpenSim-compatible data files from OPynSim's ``DataFrame``.
 
-OPynSim's ``DataFrame`` class can be constructed from third-party ``DataFrame``\s,
-provided they expose an `Arrow PyCapsule Interface <https://arrow.apache.org/docs/format/CDataInterface/PyCapsuleInterface.html>`_ (most do):
+OPynSim's ``DataFrame`` class can be constructed from third-party ``DataFrame``\s - provided
+they expose an `Arrow PyCapsule Interface <https://arrow.apache.org/docs/format/CDataInterface/PyCapsuleInterface.html>`_ (many do):
 
 .. code:: python
 

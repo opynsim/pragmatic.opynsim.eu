@@ -2,10 +2,8 @@ Render Model+State to Image
 ===========================
 
 A picture can say a thousand words - especially when presenting
-research results.
-
-This guide walks through the process of using OPynSim's in-built
-rendering engine to automatically produce images of models.
+research results. This guide goes through the process of using
+OPynSim to produce pictures of models.
 
 
 Setup Example Data

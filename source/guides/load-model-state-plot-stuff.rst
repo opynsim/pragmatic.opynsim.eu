@@ -68,9 +68,9 @@ produce sequences of model states that are typically written to ``.sto`` or
         model,
         states_table,
         allowMissingColumns=True,  # Some solvers do not fill in all available states
-        allowExtraColumns=True,    # Some data files in the wild contain extra columns
+        allowExtraColumns=True,    # Some data files may contain extra columns
         assemble=False             # (your choice)
-    ).getStateArray()
+    ).getStateArray()              # It's easier to loop over an array in Python.
 
     # `states` can then be iterated over to yield each state.
     for state in states:
@@ -116,7 +116,9 @@ The two most common state-update steps when loading data are:
 ``model.realizeX(state)``
     Realizes ``state`` to stage ``X``, making derived quantities
     that depend on ``X`` readable. If in doubt, use ``model.realizeReport(state)``.
-    ``Report`` is the latest stage (`stage list <https://simbody.github.io/3.8.0/classSimTK_1_1Stage.html#ac3ebdb6f8942a72c65886e5286dd8a13>`_).
+    ``Report`` is the latest stage (`stage list <https://simbody.github.io/3.8.0/classSimTK_1_1Stage.html#ac3ebdb6f8942a72c65886e5286dd8a13>`_), so
+    it's the most expensive to compute, but it ensures all derived
+    quantities are readable.
 
     **Beware**: "readable" does not mean "valid". Realizing a state that was
     partially filled-in can make derived/later stages invalid. For example,
