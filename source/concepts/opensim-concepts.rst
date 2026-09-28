@@ -39,10 +39,10 @@ Model Assembly & Muscle Equilibration
 
 Before running analyses, models often require special initialization steps:
 
-- **Model Assembly:** Moves coordinates ($q$) to satisfy kinematic assembly
+- **Model Assembly:** Moves coordinates (:math:`q`) to satisfy kinematic assembly
   constraints (e.g., closed loop constraints).
 - **Muscle Equilibration:** Solves for tendon strain and muscle fiber length to
-  ensure the active/passive muscle forces balance at time $t=0$:
+  ensure the active/passive muscle forces balance at time :math:`t`:
 
 .. code-block:: python
 
@@ -112,10 +112,10 @@ State Vectors
 The ``State`` encapsulates the continuous state variables of the system:
 
 - **$q$ (Generalized Coordinates):** Joint angles and translations.
-- **$u$ (Generalized Velocities):** Rate of change of coordinates ($\dot{q}$).
+- **$u$ (Generalized Velocities):** Rate of change of coordinates (:math:`q`).
 - **$z$ (Auxiliary States):** Non-mechanical variables, such as muscle activation
-  levels ($a$) and muscle fiber lengths ($l_m$).
-- **$y$:** The complete continuous state vector combining $[q, u, z]$.
+  levels (:math:`a`) and muscle fiber lengths (:math:`l_m`).
+- **$y$:** The complete continuous state vector combining :math:`[q, u, z]`.
 
 Central Role in Execution
 ^^^^^^^^^^^^^^^^^^^^^^^^^

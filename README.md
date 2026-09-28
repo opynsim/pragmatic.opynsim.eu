@@ -22,6 +22,7 @@ Here is how you can build it with `uv`:
 
 uv venv --python 3.12
 uv pip install -r requirements.txt
+source .venv/bin/activate
 uv run sphinx-build source/ build/
 ```
 

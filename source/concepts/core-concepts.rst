@@ -65,7 +65,7 @@ commonly used coordinate system types:
 
 - **Non-Cartesian Coordinate Systems:** While 3D spatial points use Cartesian
   coordinates :math:`(x, y, z)`, certain parts of a model may rely on
-  alternative representations. For example, **cylindrical coordinates** $(\rho, \phi, z)$
+  alternative representations. For example, **cylindrical coordinates** :math:`(\rho, \phi, z)`
   might be the best way to describe a muscle wrapping over a cylinder.
   **Spherical coordinates** may be the best representation of a
   ball-in-socket joint, and so on.
@@ -117,7 +117,7 @@ forces, and mathematical constraints to evaluate or simulate physical movement:
 
   - **Forward Dynamics:** Integrates equations of motion forward in time given muscle
     activations to compute resulting accelerations and trajectories.
-  - **Inverse Kinematics (IK):** Finds joint coordinates ($q$) that minimize the
+  - **Inverse Kinematics (IK):** Finds joint coordinates (:math:`q`) that minimize the
     distance between experimental motion capture markers and model markers.
   - **Inverse Dynamics (ID):** Calculates net joint moments required to produce a
     given set of kinematically observed accelerations.
@@ -144,7 +144,7 @@ A **Model State** represents the instantaneous physical condition of a dynamic s
 
 While the *Model Specification* defines what the system *is*, the *State* defines what the system *is currently doing*. A complete state vector usually contains:
 
-- **Time ($t$):** The current timestamp of the system.
-- **Generalized Positions ($q$):** Joint angle or translation values across all DoFs.
-- **Generalized Velocities ($u$):** Rate of change of coordinates ($\dot{q}$).
-- **Auxiliary States ($z$):** Non-mechanical variable states, such as muscle fiber lengths and physiological muscle activation levels.
+- **Time** (:math:`t`): The current timestamp of the system.
+- **Generalized Positions** (:math:`q`): Joint angle or translation values across all DoFs.
+- **Generalized Velocities** (:math:`u`): Rate of change of coordinates (usually :math:`u = \dot{q}`, but sometimes :math:`u \neq \dot{q}`).
+- **Auxiliary States** (:math:`z`): Non-mechanical variable states, such as muscle fiber lengths and physiological muscle activation levels.
