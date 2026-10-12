@@ -5,6 +5,8 @@ This page briefly outlines core concepts that are useful when working with
 OpenSim. See :doc:`core-concepts` for a general explanation of musculoskeletal
 modelling concepts.
 
+.. _opensim_model_component_arch:
+
 Model & Component Architecture
 ------------------------------
 
