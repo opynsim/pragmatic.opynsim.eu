@@ -1,16 +1,11 @@
 Solve Forward Dynamics
 ======================
 
-Once a model has been :doc:`loaded <load-model-state-plot-stuff>` or
-:doc:`made <make-a-pendulum>`, it can be used to solve things.
-
-One thing to solve is the model's forward dynamics (FD), which calculates
-the model's motion (accelerations, velocities, and positions) over time
-from forces/torques applied to it. FD is what's
-shown when you press the run/play button in
-`OpenSim Creator <https://www.opensimcreator.com/>`_ and
-`OpenSim <https://opensim.stanford.edu/>`_. It can be useful to diagnose how
-models behave in motion.
+Forward dynamics (FD) calculates the model's motion (accelerations, velocities,
+and positions) over time from forces/torques applied to it. FD is what's shown
+when you press the run/play button in `OpenSim Creator <https://www.opensimcreator.com/>`_
+and `OpenSim <https://opensim.stanford.edu/>`_. It can be useful to diagnose
+how models behave in motion.
 
 
 Setup Example Data
