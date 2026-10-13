@@ -61,6 +61,7 @@ issues and have a rough idea of what's going on.
    guides/render-model-states-to-video
    guides/make-a-pendulum
    guides/solve-forward-dynamics
+   guides/solve-inverse-kinematics
    guides/solve-equilibrium-position
    guides/optimize-attachment-positions
 
