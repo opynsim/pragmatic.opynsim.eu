@@ -1,4 +1,0 @@
-Solve Equilibrium Position
-==========================
-
-TODO

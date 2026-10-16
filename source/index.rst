@@ -62,8 +62,8 @@ issues and have a rough idea of what's going on.
    guides/make-a-pendulum
    guides/solve-forward-dynamics
    guides/solve-inverse-kinematics
-   guides/solve-equilibrium-position
-   guides/optimize-attachment-positions
+   guides/make-a-basic-solver
+   guides/optimize-model-properties
 
 .. toctree::
    :caption: Other Links
