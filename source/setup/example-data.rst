@@ -9,7 +9,7 @@ zip file:
 
 `📥 Download pragmatic_resources (ZIP) <../pragmatic_resources.zip>`_
 
-Guides assume these resources are unzipped into a directory called
+All guides assume these resources are unzipped into a directory called
 ``pragmatic_resources`` in your current working directory. Run this
 Python code if you don't know where that is: ``import os ; print(os.getcwd())``.
 IDEs like :doc:`pycharm` or :doc:`vscode` typically set your project's
